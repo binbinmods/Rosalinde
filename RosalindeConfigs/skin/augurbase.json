@@ -1,0 +1,15 @@
+{
+    "BaseSkin": true,
+    "PerkLevel": 0,
+    "SkinGO": "skinrosalinde",
+    "SkinID": "augurbase",
+    "SkinName": "Default",
+    "SkinOrder": 0,
+    "SkinSubclass": "augur",
+    "Sku": "",
+    "SpritePortrait": "rosalindePortrait",
+    "SpritePortraitGrande": "rosalindePortraitGrande",
+    "SpriteSilueta": "rosalindeSilueta",
+    "SpriteSiluetaGrande": "rosalindeSiluetaGrande",
+    "SteamStat": ""
+}
