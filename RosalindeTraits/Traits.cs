@@ -148,83 +148,43 @@ namespace Rosalinde
             return true;
         }
 
-        [HarmonyPrefix]
-        [HarmonyPatch(typeof(Character), "SetEvent")]
-        public static void SetEventPrefix(ref Character __instance, ref Enums.EventActivation theEvent, Character target = null)
-        {
-            /*if (theEvent == Enums.EventActivation.AuraCurseSet && !__instance.IsHero && target != null && target.IsHero && target.HaveTrait("ulfvitrconductor") && __instance.HasEffect("spark"))
-            { // if NPC has wet applied to them, deal 50% of their sparks as indirect lightning damage
-                __instance.IndirectDamage(Enums.DamageType.Lightning, Functions.FuncRoundToInt((float)__instance.GetAuraCharges("spark") * 0.5f));
-            }
-            if (theEvent == Enums.EventActivation.BeginTurn && __instance.IsHero && (__instance.HaveTrait("pestilyhealingtoxins")||__instance.HaveTrait("pestilytoxichealing"))){
-                level5ActivationCounter=0;
-                // Plugin.Log.LogInfo("Binbin - PestilyBiohealer - Reset Activation Counter: "+ level5ActivationCounter);
-            }
-            
-            */
-        }
-
-
-        [HarmonyPrefix]
-        [HarmonyPatch(typeof(AtOManager), "HeroLevelUp")]
-        public static bool HeroLevelUpPrefix(ref AtOManager __instance, Hero[] ___teamAtO, int heroIndex, string traitId)
-        {
-            Hero hero = ___teamAtO[heroIndex];
-            Plugin.Log.LogDebug(debugBase + "Level up before conditions for subclass "+ hero.SubclassName + " trait id " + traitId);
-
-            string traitOfInterest = myTraitList[4]; //Learn real magic
-            if (hero.AssignTrait(traitId))
-            {
-                TraitData traitData = Globals.Instance.GetTraitData(traitId);
-                if ((UnityEngine.Object) traitData != (UnityEngine.Object) null && traitId==traitOfInterest)
-                {
-                    Plugin.Log.LogDebug(debugBase + "Learn Real Magic inside conditions");
-                    Globals.Instance.SubClass[hero.SubclassName].HeroClassSecondary=Enums.HeroClass.Mage;
-                }
-                
-            }
-            return true;
-        }
-
+        
+        
         [HarmonyPostfix]
         [HarmonyPatch(typeof(AtOManager),"GlobalAuraCurseModificationByTraitsAndItems")]
         public static void GlobalAuraCurseModificationByTraitsAndItemsPostfix(ref AtOManager __instance, ref AuraCurseData __result, string _type, string _acId, Character _characterCaster, Character _characterTarget){
-            // Shadow Poison -  +1 Shadow Damage per 10 stacks of Poison on you. 
-            // Antidote - You are immune to Poison damage, Poison stacks on you are limited to 300
-            /*
-            if(_acId=="poison")
+            LogInfo($"GACM {subclassName}");
+            // Burn, Chill, and Spark Charges on enemies additionally apply -0.2% resistance to Holy Damage per charge. 
+            
+            Character characterOfInterest = _type == "set" ? _characterTarget : _characterCaster;            
+            string traitOfInterest;
+
+            switch (_acId)
             {
-                if(_type=="set")
-                {
-                    if (_characterTarget != null && __instance.CharacterHaveTrait(_characterTarget.SubclassName, "pestilyshadowpoison"))
-                    {   
-                        __result.AuraDamageType = Enums.DamageType.Shadow;
-                        int damageIncrease = FloorToInt((float )_characterTarget.GetAuraCharges("poison")/10.0f);
-                        //__result.AuraDamageIncreasedPerStack=0.1f;
-                        __result.AuraDamageIncreasedTotal = damageIncrease;
+                case "burn":
+                    traitOfInterest = trait0;
+                    if (IfCharacterHas(characterOfInterest,CharacterHas.Trait,traitOfInterest,AppliesTo.None))
+                    {
+                        __result = __instance.GlobalAuraCurseModifyResist(__result, Enums.DamageType.Holy, 0, -0.2f);
                     }
-                    if (_characterTarget != null && __instance.CharacterHaveTrait(_characterTarget.SubclassName, "pestilyantidote"))
-                    {   
-                        __result.MaxCharges = 300;
-                        __result.ProduceDamageWhenConsumed = false;
-                        __result.DamageWhenConsumedPerCharge = 0.0f;
-                        Plugin.Log.LogInfo("Binbin - PestilyBiohealer - Setting Poison: "+ __result.DamageWhenConsumedPerCharge);
+                    break;
 
+                case "chill":
+                    traitOfInterest = trait0;
+                    if (IfCharacterHas(characterOfInterest,CharacterHas.Trait,traitOfInterest,AppliesTo.None))
+                    {
+                        __result = __instance.GlobalAuraCurseModifyResist(__result, Enums.DamageType.Holy, 0, -0.2f);
                     }
-                }
-                if(_type=="consume")
-                {
-                    if (_characterCaster != null && __instance.CharacterHaveTrait(_characterCaster.SubclassName, "pestilyantidote"))
-                    {   
-                        Plugin.Log.LogInfo("Binbin - PestilyBiohealer - Consuming Poison");
+                    break;
 
-                        __result.MaxCharges = 300;
-                        __result.ProduceDamageWhenConsumed=false;
-                        __result.DamageWhenConsumedPerCharge=0.0f;
-                        Plugin.Log.LogInfo("Binbin - PestilyBiohealer - Consuming Poison: "+ __result.DamageWhenConsumedPerCharge);
+                case "spark":
+                    traitOfInterest = trait0;
+                    if (IfCharacterHas(characterOfInterest,CharacterHas.Trait,traitOfInterest,AppliesTo.None))
+                    {
+                        __result = __instance.GlobalAuraCurseModifyResist(__result, Enums.DamageType.Holy, 0, -0.2f);
                     }
-                }
-                */
+                    break;
+            }
             }
 
 
