@@ -1,0 +1,5 @@
+is_global = true
+build_property.RootNamespace = TheSubclass
+build_property.ProjectDir = /Users/kevinmccoy/Library/Application Support/Steam/steamapps/common/Across the Obelisk/BepInEx/Mod Development/Hero Creations/Rosalinde/CharacterTraits/
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 
