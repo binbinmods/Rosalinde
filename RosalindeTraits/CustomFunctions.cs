@@ -7,10 +7,10 @@ using Obeliskial_Essentials;
 using System.IO;
 using static UnityEngine.Mathf;
 using UnityEngine.TextCore.LowLevel;
-using static TheSubclass.Plugin;
+using static Rosalinde.Plugin;
 using System.Collections.ObjectModel;
 
-namespace TheSubclass
+namespace Rosalinde
 {
     public class CustomFunctions
     {
@@ -876,6 +876,27 @@ namespace TheSubclass
             {
                 _character.HeroItem.ScrollCombatText(Texts.Instance.GetText("traits_" + traitData.TraitName, "") + TextChargesLeft(MatchManager.Instance.activatedTraits[traitData.TraitName], traitData.TimesPerTurn), Enums.CombatScrollEffectType.Trait);
             }
+        }
+
+        /// <summary>
+        /// Places a little text scroll of the trait's name when a character's trait activates.
+        /// </summary>
+        /// <param name="_character"> Character the trait comes from</param>
+        /// <param name="traitData"> Trait to display the name of</param>
+        public static void DisplayTraitScroll(ref Character _character, TraitData traitData)
+        {
+            _character.HeroItem?.ScrollCombatText(Texts.Instance.GetText("traits_" + traitData.TraitName, ""),Enums.CombatScrollEffectType.Trait);
+        }
+
+                /// <summary>
+        /// Places a little text scroll of the trait's name when a character's trait activates.
+        /// </summary>
+        /// <param name="_character"> Character the trait comes from</param>
+        /// <param name="traitName"> Name to Display</param>
+
+        public static void DisplayTraitScroll(ref Character _character, string traitName)
+        {
+            _character.HeroItem?.ScrollCombatText(Texts.Instance.GetText("traits_" + traitName, ""),Enums.CombatScrollEffectType.Trait);
         }
 
         /// <summary>

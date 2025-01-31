@@ -2,10 +2,10 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
-	<RootNamespace>TheSubclass</RootNamespace>
-	<Product>TheSubclass</Product>
-    <AssemblyName>com.binbin.Subclass</AssemblyName>
-    <Description>Hero, The Subclass</Description>
+	<RootNamespace>Rosalinde</RootNamespace>
+	<Product>Rosalinde</Product>
+    <AssemblyName>com.binbin.Rosalinde</AssemblyName>
+    <Description>Rosalinde, The Augur</Description>
     <Version>1.0.0</Version>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <LangVersion>latest</LangVersion>
@@ -42,10 +42,7 @@
 
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
     <Copy SourceFiles="$(TargetPath)" DestinationFolder="../../../../plugins" />
-  </Target>
-
-  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Copy SourceFiles="$(TargetPath)" DestinationFolder="../../Ready to Ship/Rosalinde/BepInEx/plugins" />
+    <Copy SourceFiles="$(TargetPath)" DestinationFolder="../Rosalinde/BepInEx/plugins" />
   </Target>
 
 </Project>

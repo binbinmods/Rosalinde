@@ -4,29 +4,28 @@ using System.Collections.Generic;
 using System.Linq;
 using Obeliskial_Content;
 using UnityEngine;
+using static Rosalinde.CustomFunctions;
+using static Rosalinde.Plugin;
 
-namespace TheSubclass
+namespace Rosalinde
 {
     [HarmonyPatch]
     internal class Traits
     {
         // list of your trait IDs
-        public static string heroName = "ulfvitr";
+        public static string heroName = "rosalinde";
 
-        public static string subclassname = "stormshaman";
+        public static string subclassname = "augur";
 
         public static string[] simpleTraitList = ["trait0","trait1a","trait1b","trait2a","trait2b","trait3a","trait3b","trait4a","trait4b"];
 
-        public static string[] myTraitList = (string[])simpleTraitList.Select(trait=>heroName+trait); // Needs testing
+        public static string[] myTraitList = (string[])simpleTraitList.Select(trait=>subclassname+trait); // Needs testing
 
-        public static int level5ActivationCounter = 0;
-        public static int level5MaxActivations = 3;
-
-        string trait0 = myTraitList[0];
-        string trait2a = myTraitList[3];
-        string trait2b = myTraitList[4];
-        string trait4a = myTraitList[7];
-        string trait4b = myTraitList[8];
+        static string trait0 = myTraitList[0];
+        static string trait2a = myTraitList[3];
+        static string trait2b = myTraitList[4];
+        static string trait4a = myTraitList[7];
+        static string trait4b = myTraitList[8];
 
 
         public static string debugBase = "Binbin - Testing " + heroName + " ";
@@ -51,42 +50,79 @@ namespace TheSubclass
             List<string> heroHand = MatchManager.Instance.GetHeroHand(_character.HeroIndex);
             Hero[] teamHero = MatchManager.Instance.GetTeamHero();
             NPC[] teamNpc = MatchManager.Instance.GetTeamNPC();
-
-            // activate traits
-            // I don't know how to set the combatLog text I need to do that for all of the traits
             
-            // activate traits
-            // I don't know how to set the combatLog text I need to do that for all of the traits
+            if(!IsLivingHero(_character))
+            {
+                return;
+            }
+
             if (_trait == trait0)
-            { // TODO trait 0
-                string traitName = _trait;
+            { // Burn, Chill, and Spark Charges on enemies additionally apply -0.2% resistance to Holy Damage per charge. 
+            // At the end of your turn, all heroes heal for 12% of the Burn Charges, Chill Charges, and Shock Charges in play. -This heal does not gain bonuses-
+                string traitName = traitData.TraitName;
+                int nCharges = CountAllStacks("burn",teamHero,teamNpc);
+                nCharges += CountAllStacks("chill",teamHero,teamNpc);
+                nCharges += CountAllStacks("spark",teamHero,teamNpc);
+                LogDebug($"{traitName}: nCharges = {nCharges}");
+                int amountToHeal = Mathf.RoundToInt(nCharges*0.12f);
+                for(int i=0; i<=teamHero.Length; i++)
+                {
+                    Hero hero = teamHero[i];
+                    if(!IsLivingHero(hero))
+                        continue;
+
+                    TraitHealHero(ref _character, ref hero, amountToHeal,traitName);
+                }
                 
             }
 
                     
             else if (_trait == trait2a)
-            { // TODO trait 2a
-                string traitName = _trait;
-                
+            { // When you play a Mage Card, reduce the cost of the highest cost Healer Card in your hand by 1 until discarded. When you play a Healer Card, reduce the cost of the highest cost Mage Card in your hand by 1 until discarded. (3 times / per turn)
+                string traitName = traitData.TraitName;
+                Duality(ref _character, ref _castedCard, Enums.CardClass.Mage,Enums.CardClass.Healer,traitName);
             }
 
                 
              
             else if (_trait == trait2b)
-            { // TODO trait 2b
-                string traitName = _trait;
+            { // At the start of your turn, Dispel 3 targeting yourself, 
+              // reduce the cost of the highest cost card in your hand by 2 until discarded.
+
+                string traitName = traitData.TraitName;
+                CardData highCard = GetRandomHighestCostCard(Enums.CardType.None);
+                int amountToReduce = 2;
+                ReduceCardCost(ref highCard,_character,amountToReduce);
                 
+                _character.HealCurses(3);
+
+                DisplayTraitScroll(ref _character, traitData);
             }
 
             else if (_trait == trait4a)
-            { // TODO trait 4a
-                string traitName = _trait;
-                
+            { // When you play a \"Spell\" card, Dispel 1 targeting yourself. (4 times / per turn)
+                string traitName = traitData.TraitName;
+                if(CanIncrementTraitActivations(_trait) && _castedCard.HasCardType(Enums.CardType.Spell))
+                {
+                    _character.HealCurses(1);
+
+                    IncrementTraitActivations(_trait);
+                    DisplayRemainingChargesForTrait(ref _character,traitData);
+
+                }
             }
 
             else if (_trait == trait4b)
-            { // TODO trait 4b
-                string traitName = _trait;
+            { // When you play a \"Healing Spell\" card, Apply 2 Mitigate Charges to All Heroes. (2 times / per turn)
+                string traitName = traitData.TraitName;
+                if(CanIncrementTraitActivations(_trait))
+                {
+                    ApplyAuraCurseToAll("mitigate",2,AppliesTo.Heroes,_character,useCharacterMods:true);
+                    IncrementTraitActivations(_trait);
+                    DisplayRemainingChargesForTrait(ref _character,traitData);
+
+                }
+                
                 
             }
 

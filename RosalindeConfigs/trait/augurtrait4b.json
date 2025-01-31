@@ -1,9 +1,9 @@
 {
     "Activation": "CastCard",
-    "AuraCurseBonus1": "",
+    "AuraCurseBonus1": "regeneration",
     "AuraCurseBonus2": "",
     "AuraCurseBonus3": "",
-    "AuraCurseBonusValue1": 0,
+    "AuraCurseBonusValue1": 1,
     "AuraCurseBonusValue2": 0,
     "AuraCurseBonusValue3": 0,
     "AuraCurseImmune1": "",
@@ -36,7 +36,7 @@
     "ResistModifiedValue2": 0,
     "ResistModifiedValue3": 0,
     "TimesPerRound": 0,
-    "TimesPerTurn": 0,
+    "TimesPerTurn": 2,
     "TraitCard": "",
     "TraitCardForAllHeroes": "",
     "TraitName": "Grove Warden's Mercy"

@@ -2689,14 +2689,14 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/kevinmccoy/Library/Application Support/Steam/steamapps/common/Across the Obelisk/BepInEx/Mod Development/Hero Creations/Rosalinde/CharacterTraits/TheSubclass.csproj",
-      "projectName": "com.binbin.Subclass",
-      "projectPath": "/Users/kevinmccoy/Library/Application Support/Steam/steamapps/common/Across the Obelisk/BepInEx/Mod Development/Hero Creations/Rosalinde/CharacterTraits/TheSubclass.csproj",
+      "projectUniqueName": "/Users/kevinmccoy/Library/Application Support/Steam/steamapps/common/Across the Obelisk/BepInEx/Mod Development/Hero Creations/Rosalinde/RosalindeTraits/Rosalinde.csproj",
+      "projectName": "com.binbin.Rosalinde",
+      "projectPath": "/Users/kevinmccoy/Library/Application Support/Steam/steamapps/common/Across the Obelisk/BepInEx/Mod Development/Hero Creations/Rosalinde/RosalindeTraits/Rosalinde.csproj",
       "packagesPath": "/Users/kevinmccoy/.nuget/packages/",
-      "outputPath": "/Users/kevinmccoy/Library/Application Support/Steam/steamapps/common/Across the Obelisk/BepInEx/Mod Development/Hero Creations/Rosalinde/CharacterTraits/obj/",
+      "outputPath": "/Users/kevinmccoy/Library/Application Support/Steam/steamapps/common/Across the Obelisk/BepInEx/Mod Development/Hero Creations/Rosalinde/RosalindeTraits/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/Users/kevinmccoy/Library/Application Support/Steam/steamapps/common/Across the Obelisk/BepInEx/Mod Development/Hero Creations/Rosalinde/CharacterTraits/NuGet.Config",
+        "/Users/kevinmccoy/Library/Application Support/Steam/steamapps/common/Across the Obelisk/BepInEx/Mod Development/Hero Creations/Rosalinde/RosalindeTraits/NuGet.Config",
         "/Users/kevinmccoy/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [

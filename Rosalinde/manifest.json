@@ -1,0 +1,9 @@
+{
+    "name": "<Character>_The_<Subclass>",
+    "version_number": "1.0.0",
+    "website_url": "https://github.com/binbinmods/<githubrepo>",
+    "description": "New Hero Mod for <Character>, the <Subclass>, a <Description>.",
+    "dependencies": [
+        "meds-Obeliskial_Content-1.4.0"
+    ]
+}

@@ -1,9 +1,9 @@
-namespace TheSubclass
+namespace Rosalinde
 {
     public static class PluginInfo
     {
-        public const string PLUGIN_GUID = "com.binbin.Subclass";
-        public const string PLUGIN_NAME = "TheSubclass";
+        public const string PLUGIN_GUID = "com.binbin.Rosalinde";
+        public const string PLUGIN_NAME = "Rosalinde";
         public const string PLUGIN_VERSION = "1.0.0";
     }
 }
