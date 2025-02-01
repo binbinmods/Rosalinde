@@ -1,9 +1,9 @@
 {
-    "name": "<Character>_The_<Subclass>",
+    "name": "Rosalinde_The_Augur",
     "version_number": "1.0.0",
-    "website_url": "https://github.com/binbinmods/<githubrepo>",
-    "description": "New Hero Mod for <Character>, the <Subclass>, a <Description>.",
+    "website_url": "https://github.com/binbinmods/Rosalinde",
+    "description": "New Hero Mod for Rosalinde, the Augur, created by Dr.Objection. Rosalinde is a Healer/Mage excels at Sanctify, Regeneration, Buffer, and Supporting Mages!",
     "dependencies": [
-        "meds-Obeliskial_Content-1.4.0"
+        "meds-Obeliskial_Content-1.5.0"
     ]
 }
