@@ -17,9 +17,9 @@ namespace Rosalinde
 
         public static string subclassname = "augur";
 
-        public static string[] simpleTraitList = ["trait0","trait1a","trait1b","trait2a","trait2b","trait3a","trait3b","trait4a","trait4b"];
+        public static string[] myTraitList = ["augurtrait0", "augurtrait1a", "augurtrait1b", "augurtrait2a", "augurtrait2b", "augurtrait3a", "augurtrait3b", "augurtrait4a", "augurtrait4b"];
 
-        public static string[] myTraitList = (string[])simpleTraitList.Select(trait=>subclassname+trait); // Needs testing
+        // public static string[] myTraitList = (string[])simpleTraitList.Select(trait=>subclassname+trait); // Needs testing
 
         static string trait0 = myTraitList[0];
         static string trait2a = myTraitList[3];
@@ -50,64 +50,73 @@ namespace Rosalinde
             List<string> heroHand = MatchManager.Instance.GetHeroHand(_character.HeroIndex);
             Hero[] teamHero = MatchManager.Instance.GetTeamHero();
             NPC[] teamNpc = MatchManager.Instance.GetTeamNPC();
-            
-            if(!IsLivingHero(_character))
+
+            if (!IsLivingHero(_character))
             {
                 return;
             }
 
             if (_trait == trait0)
             { // Burn, Chill, and Spark Charges on enemies additionally apply -0.2% resistance to Holy Damage per charge. 
-            // At the end of your turn, all heroes heal for 12% of the Burn Charges, Chill Charges, and Shock Charges in play. -This heal does not gain bonuses-
+              // At the end of your turn, all heroes heal for 12% of the Burn Charges, Chill Charges, and Shock Charges in play. -This heal does not gain bonuses-
                 string traitName = traitData.TraitName;
-                int nCharges = CountAllStacks("burn",teamHero,teamNpc);
-                nCharges += CountAllStacks("chill",teamHero,teamNpc);
-                nCharges += CountAllStacks("spark",teamHero,teamNpc);
+                LogInfo($"Trait {_trait}");
+                int nCharges = CountAllStacks("burn", teamHero, teamNpc);
+                nCharges += CountAllStacks("chill", teamHero, teamNpc);
+                nCharges += CountAllStacks("spark", teamHero, teamNpc);
                 LogDebug($"{traitName}: nCharges = {nCharges}");
-                int amountToHeal = Mathf.RoundToInt(nCharges*0.12f);
-                for(int i=0; i<=teamHero.Length; i++)
+                int amountToHeal = Mathf.RoundToInt(nCharges * 0.12f);
+                for (int i = 0; i < teamHero.Length; i++)
                 {
                     Hero hero = teamHero[i];
-                    if(!IsLivingHero(hero))
+                    if (!IsLivingHero(hero))
                         continue;
 
-                    TraitHealHero(ref _character, ref hero, amountToHeal,traitName);
+                    TraitHealHero(ref _character, ref hero, amountToHeal, traitName);
                 }
-                
+                // LogInfo($"Trait {_trait} end");
+
             }
 
-                    
+
             else if (_trait == trait2a)
             { // When you play a Mage Card, reduce the cost of the highest cost Healer Card in your hand by 1 until discarded. When you play a Healer Card, reduce the cost of the highest cost Mage Card in your hand by 1 until discarded. (3 times / per turn)
                 string traitName = traitData.TraitName;
-                Duality(ref _character, ref _castedCard, Enums.CardClass.Mage,Enums.CardClass.Healer,traitName);
+                LogInfo($"Trait {_trait}");
+                Duality(ref _character, ref _castedCard, Enums.CardClass.Mage, Enums.CardClass.Healer, _trait);
+                // LogInfo($"Trait {_trait} post");
             }
 
-                
-             
+
+
             else if (_trait == trait2b)
             { // At the start of your turn, Dispel 3 targeting yourself, 
               // reduce the cost of the highest cost card in your hand by 2 until discarded.
-
+                LogDebug($"Trait {_trait}");
                 string traitName = traitData.TraitName;
+                // LogDebug($"Trait {_trait} pre");
                 CardData highCard = GetRandomHighestCostCard(Enums.CardType.None);
                 int amountToReduce = 2;
-                ReduceCardCost(ref highCard,_character,amountToReduce);
-                
+                // LogDebug($"Trait {_trait} gotcard");
+                ReduceCardCost(ref highCard, _character, amountToReduce);
+                // LogDebug($"Trait {_trait} postreduce");
                 _character.HealCurses(3);
-
-                DisplayTraitScroll(ref _character, traitData);
+                // LogDebug($"Trait {_trait} end");
+                // DisplayTraitScroll(ref _character, traitData);
             }
 
             else if (_trait == trait4a)
             { // When you play a \"Spell\" card, Dispel 1 targeting yourself. (4 times / per turn)
                 string traitName = traitData.TraitName;
-                if(CanIncrementTraitActivations(_trait) && _castedCard.HasCardType(Enums.CardType.Spell))
+                LogInfo($"Trait {_trait}");
+                if (CanIncrementTraitActivations(_trait) && _castedCard.HasCardType(Enums.CardType.Spell))
                 {
+                    LogInfo($"Trait {_trait} pre");
                     _character.HealCurses(1);
-
+                    // LogInfo($"Trait {_trait} dispel");
                     IncrementTraitActivations(_trait);
-                    DisplayRemainingChargesForTrait(ref _character,traitData);
+                    // LogInfo($"Trait {_trait} end");
+                    // DisplayRemainingChargesForTrait(ref _character, traitData);
 
                 }
             }
@@ -115,15 +124,19 @@ namespace Rosalinde
             else if (_trait == trait4b)
             { // When you play a \"Healing Spell\" card, Apply 2 Mitigate Charges to All Heroes. (2 times / per turn)
                 string traitName = traitData.TraitName;
-                if(CanIncrementTraitActivations(_trait))
+                LogInfo($"Trait {_trait}");
+                if (CanIncrementTraitActivations(_trait))
                 {
-                    ApplyAuraCurseToAll("mitigate",2,AppliesTo.Heroes,_character,useCharacterMods:true);
+                    LogInfo($"Trait {_trait} - pre");
+                    ApplyAuraCurseToAll("mitigate", 2, AppliesTo.Heroes, _character, useCharacterMods: true);
+                    // LogInfo($"Trait {_trait} - post mitigate");
                     IncrementTraitActivations(_trait);
-                    DisplayRemainingChargesForTrait(ref _character,traitData);
+                    // LogInfo($"Trait {_trait} - end");
+                    // DisplayRemainingChargesForTrait(ref _character, traitData);
 
                 }
-                
-                
+
+
             }
 
         }
@@ -148,46 +161,47 @@ namespace Rosalinde
             return true;
         }
 
-        
-        
+
+
         [HarmonyPostfix]
-        [HarmonyPatch(typeof(AtOManager),"GlobalAuraCurseModificationByTraitsAndItems")]
-        public static void GlobalAuraCurseModificationByTraitsAndItemsPostfix(ref AtOManager __instance, ref AuraCurseData __result, string _type, string _acId, Character _characterCaster, Character _characterTarget){
+        [HarmonyPatch(typeof(AtOManager), "GlobalAuraCurseModificationByTraitsAndItems")]
+        public static void GlobalAuraCurseModificationByTraitsAndItemsPostfix(ref AtOManager __instance, ref AuraCurseData __result, string _type, string _acId, Character _characterCaster, Character _characterTarget)
+        {
             LogInfo($"GACM {subclassName}");
             // Burn, Chill, and Spark Charges on enemies additionally apply -0.2% resistance to Holy Damage per charge. 
-            
-            Character characterOfInterest = _type == "set" ? _characterTarget : _characterCaster;            
+
+            Character characterOfInterest = _type == "set" ? _characterTarget : _characterCaster;
             string traitOfInterest;
 
             switch (_acId)
             {
                 case "burn":
                     traitOfInterest = trait0;
-                    if (IfCharacterHas(characterOfInterest,CharacterHas.Trait,traitOfInterest,AppliesTo.None))
+                    if (IfCharacterHas(characterOfInterest, CharacterHas.Trait, traitOfInterest, AppliesTo.Monsters))
                     {
+                        LogInfo($"Trait {traitOfInterest} - GACM");
                         __result = __instance.GlobalAuraCurseModifyResist(__result, Enums.DamageType.Holy, 0, -0.2f);
                     }
                     break;
 
                 case "chill":
                     traitOfInterest = trait0;
-                    if (IfCharacterHas(characterOfInterest,CharacterHas.Trait,traitOfInterest,AppliesTo.None))
+                    if (IfCharacterHas(characterOfInterest, CharacterHas.Trait, traitOfInterest, AppliesTo.Monsters))
                     {
+                        LogInfo($"Trait {traitOfInterest} - GACM");
                         __result = __instance.GlobalAuraCurseModifyResist(__result, Enums.DamageType.Holy, 0, -0.2f);
                     }
                     break;
 
                 case "spark":
                     traitOfInterest = trait0;
-                    if (IfCharacterHas(characterOfInterest,CharacterHas.Trait,traitOfInterest,AppliesTo.None))
+                    if (IfCharacterHas(characterOfInterest, CharacterHas.Trait, traitOfInterest, AppliesTo.Monsters))
                     {
+                        LogInfo($"Trait {traitOfInterest} - GACM");
                         __result = __instance.GlobalAuraCurseModifyResist(__result, Enums.DamageType.Holy, 0, -0.2f);
                     }
                     break;
             }
-            }
-
-
-        
+        }
     }
 }

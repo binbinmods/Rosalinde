@@ -1,0 +1,15 @@
+{
+    "AdventureLevel": 0,
+    "BaseCardback": true,
+    "CardbackID": "cardbackaugur",
+    "CardbackName": "Rosalinde",
+    "CardbackOrder": 1000,
+    "CardbackSprite": "CardBackRosalinde",
+    "CardbackSubclass": "augur",
+    "Locked": false,
+    "ObeliskLevel": 0,
+    "RankLevel": 0,
+    "ShowIfLocked": true,
+    "Sku": "",
+    "SteamStat": ""
+}

@@ -1,0 +1,15 @@
+{
+    "Card0": "curingheal",
+    "Card1": "heal",
+    "Card2": "sacredbolt",
+    "Card3": "chargedbattery",
+    "Card4": "electricdischarge",
+    "Card5": "",
+    "CardSpecial0": "",
+    "CardSpecial1": "",
+    "PackClass": "mage",
+    "PackID": "rosalinde",
+    "PackName": "Rosalinde",
+    "PerkList": [],
+    "RequiredClass": "augur"
+}
