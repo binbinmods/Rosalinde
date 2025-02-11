@@ -2687,7 +2687,7 @@
     "/Users/kevinmccoy/.nuget/packages/": {}
   },
   "project": {
-    "version": "1.0.0",
+    "version": "1.1.0",
     "restore": {
       "projectUniqueName": "/Users/kevinmccoy/Library/Application Support/Steam/steamapps/common/Across the Obelisk/BepInEx/Mod Development/Hero Creations/Rosalinde/RosalindeTraits/Rosalinde.csproj",
       "projectName": "com.binbin.Rosalinde",
