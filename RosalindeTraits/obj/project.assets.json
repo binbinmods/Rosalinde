@@ -685,13 +685,16 @@
       "type": "package",
       "path": "harmonyx/2.7.0",
       "files": [
+        ".DS_Store",
         ".nupkg.metadata",
         ".signature.p7s",
         "LICENSE",
         "harmonyx.2.7.0.nupkg.sha512",
         "harmonyx.nuspec",
+        "lib/.DS_Store",
         "lib/net35/0Harmony.dll",
         "lib/net35/0Harmony.xml",
+        "lib/net45/.DS_Store",
         "lib/net45/0Harmony.dll",
         "lib/net45/0Harmony.xml",
         "lib/netstandard2.0/0Harmony.dll",
@@ -2687,16 +2690,16 @@
     "/Users/kevinmccoy/.nuget/packages/": {}
   },
   "project": {
-    "version": "1.1.0",
+    "version": "1.2.0",
     "restore": {
-      "projectUniqueName": "/Users/kevinmccoy/Library/Application Support/Steam/steamapps/common/Across the Obelisk/BepInEx/Mod Development/Hero Creations/Rosalinde/RosalindeTraits/Rosalinde.csproj",
+      "projectUniqueName": "/Users/kevinmccoy/Library/Application Support/Steam/steamapps/common/Across the Obelisk/BepInEx/Mod Development/Hero Mods/Rosalinde/RosalindeTraits/Rosalinde.csproj",
       "projectName": "com.binbin.Rosalinde",
-      "projectPath": "/Users/kevinmccoy/Library/Application Support/Steam/steamapps/common/Across the Obelisk/BepInEx/Mod Development/Hero Creations/Rosalinde/RosalindeTraits/Rosalinde.csproj",
+      "projectPath": "/Users/kevinmccoy/Library/Application Support/Steam/steamapps/common/Across the Obelisk/BepInEx/Mod Development/Hero Mods/Rosalinde/RosalindeTraits/Rosalinde.csproj",
       "packagesPath": "/Users/kevinmccoy/.nuget/packages/",
-      "outputPath": "/Users/kevinmccoy/Library/Application Support/Steam/steamapps/common/Across the Obelisk/BepInEx/Mod Development/Hero Creations/Rosalinde/RosalindeTraits/obj/",
+      "outputPath": "/Users/kevinmccoy/Library/Application Support/Steam/steamapps/common/Across the Obelisk/BepInEx/Mod Development/Hero Mods/Rosalinde/RosalindeTraits/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/Users/kevinmccoy/Library/Application Support/Steam/steamapps/common/Across the Obelisk/BepInEx/Mod Development/Hero Creations/Rosalinde/RosalindeTraits/NuGet.Config",
+        "/Users/kevinmccoy/Library/Application Support/Steam/steamapps/common/Across the Obelisk/BepInEx/Mod Development/Hero Mods/Rosalinde/RosalindeTraits/NuGet.Config",
         "/Users/kevinmccoy/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
@@ -2721,7 +2724,8 @@
         "enableAudit": "true",
         "auditLevel": "low",
         "auditMode": "direct"
-      }
+      },
+      "SdkAnalysisLevel": "9.0.200"
     },
     "frameworks": {
       "netstandard2.1": {
@@ -2762,7 +2766,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.402/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/9.0.200/RuntimeIdentifierGraph.json"
       }
     }
   }
