@@ -23,7 +23,7 @@
     "DamageBonusPercentValue": 0.0,
     "DamageBonusPercentValue2": 0.0,
     "DamageBonusPercentValue3": 0.0,
-    "Description": "Burn, Chill, and Spark Charges on enemies additionally apply -0.2% resistance to Holy Damage per charge. At the end of your turn, all heroes heal for 12% of the Burn Charges, Chill Charges, and Shock Charges in play. -This heal does not gain bonuses-",
+    "Description": "Burn, Chill, and Spark Charges on enemies also apply -0.2% resistance to Holy Damage per charge. At the end of your turn, all heroes heal for 12% of the Burn, Chill, and Shock Charges in play. -This heal does not gain bonuses-",
     "HealFlatBonus": 0,
     "HealPercentBonus": 0.0,
     "HealReceivedFlatBonus": 0,

@@ -23,7 +23,7 @@
     "DamageBonusPercentValue": 0.0,
     "DamageBonusPercentValue2": 0.0,
     "DamageBonusPercentValue3": 0.0,
-    "Description": "At the start of your turn, Dispel 3 targeting yourself, and reduce the cost of the highest cost card in your hand by 2 until discarded.",
+    "Description": "At the start of your turn, Dispel 2 targeting yourself, and reduce the cost of the highest cost card in your hand by 2 until discarded.",
     "HealFlatBonus": 0,
     "HealPercentBonus": 0.0,
     "HealReceivedFlatBonus": 0,

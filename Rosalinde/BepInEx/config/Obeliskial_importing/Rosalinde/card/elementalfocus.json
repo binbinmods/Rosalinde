@@ -47,7 +47,7 @@
     "DispelAuras": 0,
     "DrawCard": 0,
     "EffectCastCenter": false,
-    "EffectCaster": "",
+    "EffectCaster": "lifebloom",
     "EffectCasterRepeat": false,
     "EffectPreAction": "",
     "EffectTarget": "",

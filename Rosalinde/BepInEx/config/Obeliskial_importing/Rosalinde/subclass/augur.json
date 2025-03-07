@@ -17,7 +17,7 @@
     "ChallengePack4": "witch",
     "ChallengePack5": "friar",
     "ChallengePack6": "enchanter",
-    "CharacterDescription": "Rosalinde hails from a separate elven forest kingdom called Elheim. She heard about the Obelisk Disturbance occuring in Senenthia, and came over to investigate at the behest of one of her friends, Sylvie.",
+    "CharacterDescription": "Rosalinde hails from a separate elven kingdom called Elheim. Upon hearing about the Obelisk Disturbance occuring in Senenthia, she came over to investigate at the behest of her friend, Sylvie.",
     "CharacterDescriptionStrength": "This character excels at Sanctify, Regeneration, Buffer, and Supporting Mages!",
     "CharacterName": "Rosalinde",
     "Energy": 1,
@@ -33,10 +33,10 @@
     "Item": "worldtreeleaf",
     "MaxHP": [
         0,
-        5,
-        10,
-        10,
-        10
+        8,
+        8,
+        8,
+        8
     ],
     "OrderInList": 5,
     "ResistSlashing": 0,

@@ -15,7 +15,7 @@
     "UpgradedFrom": "",
     "UpgradesTo1": "worldtreeleafa",
     "UpgradesTo2": "worldtreeleafb",
-    "UpgradesToRare": "",
+    "UpgradesToRare": "worldtreeleafrare",
     "CardClass": "Item",
     "CardType": "Accesory",
     "CardTypeAux": [],

@@ -188,7 +188,7 @@
     "PushTarget": 0,
     "SelfKillHiddenSeconds": 0,
     "ShowInTome": true,
-    "Starter": true,
+    "Starter": false,
     "Visible": false,
     "CardNumber": 0,
     "CardTypeList": [],

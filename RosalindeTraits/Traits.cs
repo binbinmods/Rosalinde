@@ -82,7 +82,7 @@ namespace Rosalinde
             else if (_trait == trait2a)
             { // When you play a Mage Card, reduce the cost of the highest cost Healer Card in your hand by 1 until discarded. When you play a Healer Card, reduce the cost of the highest cost Mage Card in your hand by 1 until discarded. (3 times / per turn)
                 string traitName = traitData.TraitName;
-                LogInfo($"Trait {_trait}");
+                LogInfo($"Trait {_trait}: {traitName}");
                 Duality(ref _character, ref _castedCard, Enums.CardClass.Mage, Enums.CardClass.Healer, _trait);
                 // LogInfo($"Trait {_trait} post");
             }
@@ -92,15 +92,15 @@ namespace Rosalinde
             else if (_trait == trait2b)
             { // At the start of your turn, Dispel 3 targeting yourself, 
               // reduce the cost of the highest cost card in your hand by 2 until discarded.
-                LogDebug($"Trait {_trait}");
                 string traitName = traitData.TraitName;
+                LogInfo($"Trait {_trait}: {traitName}");
                 // LogDebug($"Trait {_trait} pre");
                 CardData highCard = GetRandomHighestCostCard(Enums.CardType.None);
                 int amountToReduce = 2;
                 // LogDebug($"Trait {_trait} gotcard");
                 ReduceCardCost(ref highCard, _character, amountToReduce);
                 // LogDebug($"Trait {_trait} postreduce");
-                _character.HealCurses(3);
+                _character.HealCurses(2);
                 // LogDebug($"Trait {_trait} end");
                 // DisplayTraitScroll(ref _character, traitData);
             }
@@ -108,7 +108,7 @@ namespace Rosalinde
             else if (_trait == trait4a)
             { // When you play a \"Spell\" card, Dispel 1 targeting yourself. (4 times / per turn)
                 string traitName = traitData.TraitName;
-                LogInfo($"Trait {_trait}");
+                LogInfo($"Trait {_trait}: {traitName}");
                 if (CanIncrementTraitActivations(_trait) && _castedCard.HasCardType(Enums.CardType.Spell))
                 {
                     LogInfo($"Trait {_trait} pre");
@@ -124,7 +124,7 @@ namespace Rosalinde
             else if (_trait == trait4b)
             { // When you play a \"Healing Spell\" card, Apply 2 Mitigate Charges to All Heroes. (2 times / per turn)
                 string traitName = traitData.TraitName;
-                LogInfo($"Trait {_trait}");
+                LogInfo($"Trait {_trait}: {traitName}");
                 if (CanIncrementTraitActivations(_trait))
                 {
                     LogInfo($"Trait {_trait} - pre");
