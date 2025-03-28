@@ -1,3 +1,7 @@
+# 1.3.1
+
+Decks can now be saved
+
 # 1.3.0
 
 Fixed crash in Obelisk Challenge Mode
