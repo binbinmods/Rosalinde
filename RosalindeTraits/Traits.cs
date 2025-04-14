@@ -203,5 +203,45 @@ namespace Rosalinde
                     break;
             }
         }
+
+        [HarmonyPostfix]
+        [HarmonyPatch(typeof(Globals), "CreateGameContent")]
+        public static void CreateGameContentPostfix()
+        {
+            SubClassData eve = Globals.Instance?.GetSubClassData("elementalist");
+            SubClassData rosalinde = Globals.Instance?.GetSubClassData("augur");
+
+            if(!eve)
+            {
+                LogDebug("CreateGameContentPostfix - Null Eve");
+                return;
+            }
+            if(!rosalinde)
+            {
+                LogDebug("CreateGameContentPostfix - Null Rosalinde");
+                return;
+            }
+
+            AudioClip hitSound = eve.GetHitSound();
+            List<AudioClip> hitSoundRework = Traverse.Create(eve).Field("hitSoundRework").GetValue<List<AudioClip>>();
+
+            LogDebug("Eve hitsound name: " + hitSound?.name ?? "null");
+            LogDebug("Eve hitsoundrework size: " + hitSoundRework?.Count ?? "null");
+
+            Traverse.Create(rosalinde).Field("hitSound").SetValue(hitSound);
+            Traverse.Create(rosalinde).Field("hitSoundRework").SetValue(hitSoundRework);
+
+            LogDebug("CreateGameContentPostfix - Shifting gameObjectAnimated");
+            Vector3 lp = rosalinde.GameObjectAnimated.transform.localPosition;
+            LogDebug($"CreateGameContentPostfix - Current Local Position {lp}, shifting by {XOffset.Value}, {YOffset.Value}");
+            rosalinde.GameObjectAnimated.transform.localPosition = new Vector3(lp.x + XOffset.Value, lp.y + YOffset.Value, lp.z);
+            
+
+            Dictionary<string,SubClassData> _SubClass = Traverse.Create(Globals.Instance).Field("_SubClass").GetValue<Dictionary<string,SubClassData>>();
+            _SubClass["augur"] = rosalinde;
+            Traverse.Create(Globals.Instance).Field("_SubClass").SetValue(_SubClass);
+            
+            LogDebug("CreateGameContentPostfix - Set changes");
+        }
     }
 }

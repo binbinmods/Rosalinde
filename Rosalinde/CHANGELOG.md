@@ -1,3 +1,7 @@
+# 1.3.2
+
+Updated hitsound and enabled config for shifting the gameobject.
+
 # 1.3.1
 
 Decks can now be saved

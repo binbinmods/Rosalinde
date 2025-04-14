@@ -21,6 +21,8 @@ namespace Rosalinde
         internal static ManualLogSource Log;
 
         public static ConfigEntry<bool> EnableDebugging { get; set; }
+        public static ConfigEntry<float> XOffset { get; set; }
+        public static ConfigEntry<float> YOffset { get; set; }
 
         public static string characterName = "Rosalinde";
         public static string subclassName = "Augur"; // needs caps
@@ -32,6 +34,8 @@ namespace Rosalinde
             Log.LogInfo($"{PluginInfo.PLUGIN_GUID} {PluginInfo.PLUGIN_VERSION} has loaded!");
             
             EnableDebugging = Config.Bind(new ConfigDefinition("Rosalinde", "Enable Debugging"), true, new ConfigDescription("Enables debugging logs."));
+            XOffset = Config.Bind(new ConfigDefinition("Rosalinde", "X Offset"), 0f, new ConfigDescription("Shifts Rosalinde's position X units to the right (make negative if you want it to go to the left)."));
+            YOffset = Config.Bind(new ConfigDefinition("Rosalinde", "Y Offset"), 0f, new ConfigDescription("Shifts Rosalinde's position Y units up (make negative if you want it to go down)."));
 
             // register with Obeliskial Essentials
             RegisterMod(
