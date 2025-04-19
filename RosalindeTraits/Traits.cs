@@ -66,7 +66,7 @@ namespace Rosalinde
                 nCharges += CountAllStacks("chill", teamHero, teamNpc);
                 nCharges += CountAllStacks("spark", teamHero, teamNpc);
                 LogDebug($"{traitName}: nCharges = {nCharges}");
-                int amountToHeal = Mathf.RoundToInt(nCharges * 0.12f);
+                int amountToHeal = Mathf.RoundToInt(nCharges * 0.11f);
                 for (int i = 0; i < teamHero.Length; i++)
                 {
                     Hero hero = teamHero[i];

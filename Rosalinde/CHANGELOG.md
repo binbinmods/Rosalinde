@@ -1,6 +1,12 @@
 # 1.3.2
 
-Updated hitsound and enabled config for shifting the gameobject.
+Updated hitsound
+
+Enabled config for shifting the gameobject.
+
+Hp scaling decreased from 8/level to 7/level
+
+Decreased Passive healing from 12% to 11%
 
 # 1.3.1
 
