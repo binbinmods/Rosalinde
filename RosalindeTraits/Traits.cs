@@ -6,6 +6,7 @@ using Obeliskial_Content;
 using UnityEngine;
 using static Rosalinde.CustomFunctions;
 using static Rosalinde.Plugin;
+using UnityEngine.AI;
 
 namespace Rosalinde
 {
@@ -231,10 +232,14 @@ namespace Rosalinde
             Traverse.Create(rosalinde).Field("hitSound").SetValue(hitSound);
             Traverse.Create(rosalinde).Field("hitSoundRework").SetValue(hitSoundRework);
 
-            LogDebug("CreateGameContentPostfix - Shifting gameObjectAnimated");
-            Vector3 lp = rosalinde.GameObjectAnimated.transform.localPosition;
-            LogDebug($"CreateGameContentPostfix - Current Local Position {lp}, shifting by {XOffset.Value}, {YOffset.Value}");
-            rosalinde.GameObjectAnimated.transform.localPosition = new Vector3(lp.x + XOffset.Value, lp.y + YOffset.Value, lp.z);
+            // LogDebug("CreateGameContentPostfix - Shifting gameObjectAnimated");
+            // Vector3 lp = rosalinde.GameObjectAnimated.transform.localPosition;
+            // LogDebug($"CreateGameContentPostfix - World Position {rosalinde.GameObjectAnimated.transform.position}");
+            // LogDebug($"CreateGameContentPostfix - Current Local Position {lp}, shifting by {XOffset.Value}, {YOffset.Value}");
+            
+            // rosalinde.GameObjectAnimated.transform.localPosition = new Vector3(lp.x + XOffset.Value + 1, lp.y + YOffset.Value, lp.z);
+            // LogDebug($"CreateGameContentPostfix - New World Position {rosalinde.GameObjectAnimated.transform.position}");
+            // LogDebug($"CreateGameContentPostfix - New Local Position {lp}, shifting by {XOffset.Value}, {YOffset.Value}");
             
 
             Dictionary<string,SubClassData> _SubClass = Traverse.Create(Globals.Instance).Field("_SubClass").GetValue<Dictionary<string,SubClassData>>();
@@ -243,5 +248,27 @@ namespace Rosalinde
             
             LogDebug("CreateGameContentPostfix - Set changes");
         }
+
+        [HarmonyPostfix]
+        [HarmonyPatch(typeof(HeroItem), "Init")]
+        public static void InitPostfix(ref HeroItem __instance)
+        {
+            LogDebug($"Init HeroItem for {__instance.Hero.SubclassName}");
+            if(__instance.Hero.SubclassName.ToLower() != "augur")
+            {                
+                return;
+            }
+
+            Vector3 lp = __instance.animatedTransform.localPosition;
+            LogDebug($"InitPostfix - World Position {__instance.animatedTransform.position}");
+            LogDebug($"InitPostfix - Current Local Position {lp}, shifting by {XOffset.Value}, {YOffset.Value}");
+            
+            // rosalinde.GameObjectAnimated.transform.localPosition = new Vector3(lp.x + XOffset.Value + 1, lp.y + YOffset.Value, lp.z);
+
+            __instance.animatedTransform.localPosition = new Vector3(lp.x + XOffset.Value * 0.01f, lp.y + YOffset.Value * 0.01f, lp.z);
+            LogDebug($"InitPostfix - New World Position {__instance.animatedTransform.position}");
+            LogDebug($"InitPostfix - New Local Position {lp}, shifting by {XOffset.Value}, {YOffset.Value}");
+        }
+
     }
 }
