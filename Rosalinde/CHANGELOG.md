@@ -1,3 +1,7 @@
+# 1.3.3
+
+Added Singularity Deck
+
 # 1.3.2
 
 Updated hitsound
@@ -34,7 +38,7 @@ Nerfed base speed to 13 from 14.
 - Fixed various possible card bugs surrounding "Elemental Roar" (I hope lol)
 - Improved / edited various character lore flavor text
 - Edited some Texts Level Up Traits Text (Grammar only)
-- Improved various sounds and effects for cards 
+- Improved various sounds and effects for cards
 
 # 1.1.0
 

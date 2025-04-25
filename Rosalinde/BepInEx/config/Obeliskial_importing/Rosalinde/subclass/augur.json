@@ -65,5 +65,6 @@
     "Trait3A": "augurtrait3a",
     "Trait3B": "augurtrait3b",
     "Trait4A": "augurtrait4a",
-    "Trait4B": "augurtrait4b"
+    "Trait4B": "augurtrait4b",
+    "CardsSingularity": ["icelance", "shocknova", "sacredbolt", "electricdischarge","heal", "vitalize", "chargebattery", "managem", "curingheal","zap","frostbolt","frostnova","icicle","flashheal","fireblast"]
 }
