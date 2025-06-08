@@ -59,7 +59,7 @@ namespace Rosalinde
 
             if (_trait == trait0)
             { // Burn, Chill, and Spark Charges on enemies additionally apply -0.2% resistance to Holy Damage per charge. 
-              // At the end of your turn, all heroes heal for 12% of the Burn Charges, Chill Charges, and Shock Charges in play. -This heal does not gain bonuses-
+              // At the end of your turn, all heroes heal for 11% of the Burn Charges, Chill Charges, and Shock Charges in play. -This heal does not gain bonuses-
                 string traitName = traitData.TraitName;
                 LogInfo($"Trait {_trait}");
                 int nCharges = CountAllStacks("burn", teamHero, teamNpc);
@@ -212,12 +212,12 @@ namespace Rosalinde
             SubClassData eve = Globals.Instance?.GetSubClassData("elementalist");
             SubClassData rosalinde = Globals.Instance?.GetSubClassData("augur");
 
-            if(!eve)
+            if (!eve)
             {
                 LogDebug("CreateGameContentPostfix - Null Eve");
                 return;
             }
-            if(!rosalinde)
+            if (!rosalinde)
             {
                 LogDebug("CreateGameContentPostfix - Null Rosalinde");
                 return;
@@ -236,16 +236,16 @@ namespace Rosalinde
             // Vector3 lp = rosalinde.GameObjectAnimated.transform.localPosition;
             // LogDebug($"CreateGameContentPostfix - World Position {rosalinde.GameObjectAnimated.transform.position}");
             // LogDebug($"CreateGameContentPostfix - Current Local Position {lp}, shifting by {XOffset.Value}, {YOffset.Value}");
-            
+
             // rosalinde.GameObjectAnimated.transform.localPosition = new Vector3(lp.x + XOffset.Value + 1, lp.y + YOffset.Value, lp.z);
             // LogDebug($"CreateGameContentPostfix - New World Position {rosalinde.GameObjectAnimated.transform.position}");
             // LogDebug($"CreateGameContentPostfix - New Local Position {lp}, shifting by {XOffset.Value}, {YOffset.Value}");
-            
 
-            Dictionary<string,SubClassData> _SubClass = Traverse.Create(Globals.Instance).Field("_SubClass").GetValue<Dictionary<string,SubClassData>>();
+
+            Dictionary<string, SubClassData> _SubClass = Traverse.Create(Globals.Instance).Field("_SubClass").GetValue<Dictionary<string, SubClassData>>();
             _SubClass["augur"] = rosalinde;
             Traverse.Create(Globals.Instance).Field("_SubClass").SetValue(_SubClass);
-            
+
             LogDebug("CreateGameContentPostfix - Set changes");
         }
 
@@ -254,15 +254,15 @@ namespace Rosalinde
         public static void InitPostfix(ref HeroItem __instance)
         {
             LogDebug($"Init HeroItem for {__instance.Hero.SubclassName}");
-            if(__instance.Hero.SubclassName.ToLower() != "augur")
-            {                
+            if (__instance.Hero.SubclassName.ToLower() != "augur")
+            {
                 return;
             }
 
             Vector3 lp = __instance.animatedTransform.localPosition;
             LogDebug($"InitPostfix - World Position {__instance.animatedTransform.position}");
             LogDebug($"InitPostfix - Current Local Position {lp}, shifting by {XOffset.Value}, {YOffset.Value}");
-            
+
             // rosalinde.GameObjectAnimated.transform.localPosition = new Vector3(lp.x + XOffset.Value + 1, lp.y + YOffset.Value, lp.z);
 
             __instance.animatedTransform.localPosition = new Vector3(lp.x + XOffset.Value * 0.01f, lp.y + YOffset.Value * 0.01f, lp.z);

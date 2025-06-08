@@ -2,10 +2,12 @@
 
 A hero mod, introducing Rosalinde, a Healer/Mage created by Dr.Objection.
 
-This currently does not include any events or quests related to Rosalinde. This will be updated in the future with a future mod release, it will include a sub-zone or three and a few quests. 
+This currently does not include any events or quests related to Rosalinde. This will be updated in the future with a future mod release, it will include a sub-zone or three and a few quests.
 
 A couple of notes:
+
 ## Notes:
+
 - I understand that things are going to be janky at times, and there are definitely bugs that will be worked out
 - **What to do if Rosalinde is not unlocked:** Due to some jankiness of the way the code works, Rosalinde is unlocked only for the profile that is open when you launch the game (and for new profiles). So if they aren't unlocked in the correct profile, switch to that profile, close the game and re-open it and they will be unlocked. I'll fix this in the future, but most people won't notice it. You can also just use the profile editor to fix it.
 - There are **no character events** for Rosalinde at this time beyond the ones that are available to all characters of a given class (such as pet trainers or healers being able to remove cards at Rest areas).
@@ -17,8 +19,8 @@ This mod relies on [Obeliskial Content](https://across-the-obelisk.thunderstore.
 <summary>Traits</summary>
 
 ### Level 1
-- Wisdom of The Ancients: Burn, Chill, and Spark Charges on enemies additionally apply -0.2% resistance to Holy Damage per charge. At the end of your turn, all heroes heal for 12% of the Burn Charges, Chill Charges, and Shock Charges in play. -This heal does not gain bonuses-
 
+- Wisdom of The Ancients: Burn, Chill, and Spark Charges on enemies additionally apply -0.2% resistance to Holy Damage per charge. At the end of your turn, all heroes heal for 11% of the Burn Charges, Chill Charges, and Shock Charges in play. -This heal does not gain bonuses-
 
 ### Level 2
 
@@ -44,16 +46,15 @@ Bountiful Restoration
 
 </details>
 
-
 ## Installation (manual)
 
 1. Install [Obeliskial Essentials](https://across-the-obelisk.thunderstore.io/package/meds/Obeliskial_Essentials/) and [Obeliskial Content](https://across-the-obelisk.thunderstore.io/package/meds/Obeliskial_Content/).
 2. Click _Manual Download_ at the top of the page.
 3. In Steam, right-click Across the Obelisk and select _Manage_->_Browse local files_.
-4. Extract the archive into the game folder. Your _Across the Obelisk_ folder should now contain a _BepInEx_ folder and a _doorstop\_libs_ folder.
+4. Extract the archive into the game folder. Your _Across the Obelisk_ folder should now contain a _BepInEx_ folder and a _doorstop_libs_ folder.
 5. Run the game. If everything runs correctly, you will see this mod in the list of registered mods on the main menu.
 6. Press F5 to open/close the Config Manager and F1 to show/hide mod version information.
-7. Note: I am not certain about these install instructions. In the worst case, just copy _TheWiseWolf.dll_ into the _BepInEx\plugins_ folder, and the _Rosalinde_ folder (the one with the subfolders containing the json files) into _BepInEx\config\Obeliskial\_importing_
+7. Note: I am not certain about these install instructions. In the worst case, just copy _TheWiseWolf.dll_ into the _BepInEx\plugins_ folder, and the _Rosalinde_ folder (the one with the subfolders containing the json files) into _BepInEx\config\Obeliskial_importing_
 
 ## Installation (automatic)
 
@@ -69,4 +70,4 @@ Hope you enjoy it and if have any issues, ping me in Discord or make a post in t
 
 ## Donation
 
-Please do not donate to me. If you wish to support me, I would prefer it if you just gave me feedback. 
+Please do not donate to me. If you wish to support me, I would prefer it if you just gave me feedback.

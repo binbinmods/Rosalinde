@@ -1,3 +1,11 @@
+# 1.3.4
+
+Changed text to display the passive healing change
+
+World Tree Leaf no longer should appear in shops
+
+Augur's Blessing now triggers on Healing Spell rather than On Heal
+
 # 1.3.3
 
 Added Singularity Deck
