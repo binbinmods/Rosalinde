@@ -61,7 +61,7 @@ namespace Rosalinde
             { // Burn, Chill, and Spark Charges on enemies additionally apply -0.2% resistance to Holy Damage per charge. 
               // At the end of your turn, all heroes heal for 11% of the Burn Charges, Chill Charges, and Shock Charges in play. -This heal does not gain bonuses-
                 string traitName = traitData.TraitName;
-                LogInfo($"Trait {_trait}");
+                LogDebug($"Trait {_trait}");
                 int nCharges = CountAllStacks("burn", teamHero, teamNpc);
                 nCharges += CountAllStacks("chill", teamHero, teamNpc);
                 nCharges += CountAllStacks("spark", teamHero, teamNpc);
@@ -83,9 +83,8 @@ namespace Rosalinde
             else if (_trait == trait2a)
             { // When you play a Mage Card, reduce the cost of the highest cost Healer Card in your hand by 1 until discarded. When you play a Healer Card, reduce the cost of the highest cost Mage Card in your hand by 1 until discarded. (3 times / per turn)
                 string traitName = traitData.TraitName;
-                LogInfo($"Trait {_trait}: {traitName}");
+                LogDebug($"Trait {_trait}: {traitName}");
                 Duality(ref _character, ref _castedCard, Enums.CardClass.Mage, Enums.CardClass.Healer, _trait);
-                // LogInfo($"Trait {_trait} post");
             }
 
 
@@ -94,7 +93,7 @@ namespace Rosalinde
             { // At the start of your turn, Dispel 3 targeting yourself, 
               // reduce the cost of the highest cost card in your hand by 2 until discarded.
                 string traitName = traitData.TraitName;
-                LogInfo($"Trait {_trait}: {traitName}");
+                LogDebug($"Trait {_trait}: {traitName}");
                 // LogDebug($"Trait {_trait} pre");
                 CardData highCard = GetRandomHighestCostCard(Enums.CardType.None);
                 int amountToReduce = 2;
@@ -109,15 +108,11 @@ namespace Rosalinde
             else if (_trait == trait4a)
             { // When you play a \"Spell\" card, Dispel 1 targeting yourself. (4 times / per turn)
                 string traitName = traitData.TraitName;
-                LogInfo($"Trait {_trait}: {traitName}");
+                LogDebug($"Trait {_trait}: {traitName}");
                 if (CanIncrementTraitActivations(_trait) && _castedCard.HasCardType(Enums.CardType.Spell))
                 {
-                    LogInfo($"Trait {_trait} pre");
                     _character.HealCurses(1);
-                    // LogInfo($"Trait {_trait} dispel");
                     IncrementTraitActivations(_trait);
-                    // LogInfo($"Trait {_trait} end");
-                    // DisplayRemainingChargesForTrait(ref _character, traitData);
 
                 }
             }
@@ -125,15 +120,11 @@ namespace Rosalinde
             else if (_trait == trait4b)
             { // When you play a \"Healing Spell\" card, Apply 2 Mitigate Charges to All Heroes. (2 times / per turn)
                 string traitName = traitData.TraitName;
-                LogInfo($"Trait {_trait}: {traitName}");
+                LogDebug($"Trait {_trait}: {traitName}");
                 if (CanIncrementTraitActivations(_trait))
                 {
-                    LogInfo($"Trait {_trait} - pre");
                     ApplyAuraCurseToAll("mitigate", 2, AppliesTo.Heroes, _character, useCharacterMods: true);
-                    // LogInfo($"Trait {_trait} - post mitigate");
                     IncrementTraitActivations(_trait);
-                    // LogInfo($"Trait {_trait} - end");
-                    // DisplayRemainingChargesForTrait(ref _character, traitData);
 
                 }
 
@@ -168,7 +159,7 @@ namespace Rosalinde
         [HarmonyPatch(typeof(AtOManager), "GlobalAuraCurseModificationByTraitsAndItems")]
         public static void GlobalAuraCurseModificationByTraitsAndItemsPostfix(ref AtOManager __instance, ref AuraCurseData __result, string _type, string _acId, Character _characterCaster, Character _characterTarget)
         {
-            LogInfo($"GACM {subclassName}");
+            // LogInfo($"GACM {subclassName}");
             // Burn, Chill, and Spark Charges on enemies additionally apply -0.2% resistance to Holy Damage per charge. 
 
             Character characterOfInterest = _type == "set" ? _characterTarget : _characterCaster;
@@ -180,7 +171,7 @@ namespace Rosalinde
                     traitOfInterest = trait0;
                     if (IfCharacterHas(characterOfInterest, CharacterHas.Trait, traitOfInterest, AppliesTo.Monsters))
                     {
-                        LogInfo($"Trait {traitOfInterest} - GACM");
+                        LogDebug($"Trait {traitOfInterest} - GACM");
                         __result = __instance.GlobalAuraCurseModifyResist(__result, Enums.DamageType.Holy, 0, -0.2f);
                     }
                     break;
@@ -189,7 +180,7 @@ namespace Rosalinde
                     traitOfInterest = trait0;
                     if (IfCharacterHas(characterOfInterest, CharacterHas.Trait, traitOfInterest, AppliesTo.Monsters))
                     {
-                        LogInfo($"Trait {traitOfInterest} - GACM");
+                        LogDebug($"Trait {traitOfInterest} - GACM");
                         __result = __instance.GlobalAuraCurseModifyResist(__result, Enums.DamageType.Holy, 0, -0.2f);
                     }
                     break;
@@ -198,7 +189,7 @@ namespace Rosalinde
                     traitOfInterest = trait0;
                     if (IfCharacterHas(characterOfInterest, CharacterHas.Trait, traitOfInterest, AppliesTo.Monsters))
                     {
-                        LogInfo($"Trait {traitOfInterest} - GACM");
+                        LogDebug($"Trait {traitOfInterest} - GACM");
                         __result = __instance.GlobalAuraCurseModifyResist(__result, Enums.DamageType.Holy, 0, -0.2f);
                     }
                     break;

@@ -1,3 +1,9 @@
+# 1.4.0
+
+Updated for AtO v1.6.22
+
+Removed excessive logging
+
 # 1.3.4
 
 Changed text to display the passive healing change
