@@ -31,21 +31,23 @@ namespace Rosalinde
 
         public static string debugBase = "Binbin - Testing " + heroName + " ";
 
-        public static void DoCustomTrait(string _trait, ref Trait __instance)
+        [HarmonyPrefix]
+        [HarmonyPatch(typeof(Trait), "DoTrait")]
+        public static bool DoTrait(Enums.EventActivation _theEvent, string _trait, Character _character, Character _target, int _auxInt, string _auxString, CardData _castedCard, ref Trait __instance)
+        {
+            if ((UnityEngine.Object)MatchManager.Instance == (UnityEngine.Object)null)
+                return false;
+            if (Content.medsCustomTraitsSource.Contains(_trait) && myTraitList.Contains(_trait))
+            {
+                DoCustomTrait(_trait, ref __instance, ref _theEvent, ref _character, ref _target, ref _auxInt, ref _auxString, ref _castedCard);
+                return false;
+            }
+            return true;
+        }
+
+        public static void DoCustomTrait(string _trait, ref Trait __instance, ref Enums.EventActivation _theEvent, ref Character _character, ref Character _target, ref int _auxInt, ref string _auxString, ref CardData _castedCard)
         {
             // get info you may need
-            Enums.EventActivation _theEvent = Traverse.Create(__instance).Field("theEvent").GetValue<Enums.EventActivation>();
-            Character _character = Traverse.Create(__instance).Field("character").GetValue<Character>();
-            Character _target = Traverse.Create(__instance).Field("target").GetValue<Character>();
-            int _auxInt = Traverse.Create(__instance).Field("auxInt").GetValue<int>();
-            string _auxString = Traverse.Create(__instance).Field("auxString").GetValue<string>();
-            CardData _castedCard = Traverse.Create(__instance).Field("castedCard").GetValue<CardData>();
-            Traverse.Create(__instance).Field("character").SetValue(_character);
-            Traverse.Create(__instance).Field("target").SetValue(_target);
-            Traverse.Create(__instance).Field("theEvent").SetValue(_theEvent);
-            Traverse.Create(__instance).Field("auxInt").SetValue(_auxInt);
-            Traverse.Create(__instance).Field("auxString").SetValue(_auxString);
-            Traverse.Create(__instance).Field("castedCard").SetValue(_castedCard);
             TraitData traitData = Globals.Instance.GetTraitData(_trait);
             List<CardData> cardDataList = [];
             List<string> heroHand = MatchManager.Instance.GetHeroHand(_character.HeroIndex);
@@ -132,28 +134,6 @@ namespace Rosalinde
             }
 
         }
-
-        [HarmonyPrefix]
-        [HarmonyPatch(typeof(Trait), "DoTrait")]
-        public static bool DoTrait(Enums.EventActivation _theEvent, string _trait, Character _character, Character _target, int _auxInt, string _auxString, CardData _castedCard, ref Trait __instance)
-        {
-            if ((UnityEngine.Object)MatchManager.Instance == (UnityEngine.Object)null)
-                return false;
-            Traverse.Create(__instance).Field("character").SetValue(_character);
-            Traverse.Create(__instance).Field("target").SetValue(_target);
-            Traverse.Create(__instance).Field("theEvent").SetValue(_theEvent);
-            Traverse.Create(__instance).Field("auxInt").SetValue(_auxInt);
-            Traverse.Create(__instance).Field("auxString").SetValue(_auxString);
-            Traverse.Create(__instance).Field("castedCard").SetValue(_castedCard);
-            if (Content.medsCustomTraitsSource.Contains(_trait) && myTraitList.Contains(_trait))
-            {
-                DoCustomTrait(_trait, ref __instance);
-                return false;
-            }
-            return true;
-        }
-
-
 
         [HarmonyPostfix]
         [HarmonyPatch(typeof(AtOManager), "GlobalAuraCurseModificationByTraitsAndItems")]
