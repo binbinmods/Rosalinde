@@ -1,4 +1,4 @@
-﻿using HarmonyLib;
+using HarmonyLib;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -453,7 +453,7 @@ namespace Rosalinde
         /// </summary>
         /// <param name="damageType">Damage type to deal</param>
         /// <param name="amount">Amount of damage to deal</param>
-        public static void DealIndirectDamageToAllMonsters(Enums.DamageType damageType, int amount)
+        public static void DealIndirectDamageToAllMonsters(Enums.DamageType damageType, int amount, Character source = null)
         {
             Plugin.Log.LogDebug(debugBase + "Dealing Indirect Damage");
             if (MatchManager.Instance == null)
@@ -464,7 +464,7 @@ namespace Rosalinde
                 NPC npc = teamNpc[index];
                 if (IsLivingNPC(npc))
                 {
-                    npc.IndirectDamage(damageType, amount);
+                    npc.IndirectDamage(damageType, amount, source);
                 }
             }
         }
